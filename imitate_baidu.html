@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>author : 顽石</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <style>
+        #app {
+            width: 500px;
+            margin: 50px auto
+        }
+
+        ul {
+            padding: 0;
+            border: 1px #bbb6b6 solid;
+            border-bottom: none;
+        }
+
+        li {
+            list-style: none;
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px #bbb6b6 solid;
+            text-indent: 1em;
+            user-select: none;
+        }
+
+        li:hover {
+            cursor: pointer;
+            background: #d9edf7
+        }
+
+        .active {
+            background: #d9edf7
+        }
+
+        .wrap {
+            margin-left: 10%
+        }
+
+        .ul {
+            display: none
+        }
+
+        .btn-info {
+            border-radius: 0px;
+            display: none
+        }
+
+        @media screen and (max-width: 400px) {
+            .wrap {
+                margin-left: 6%
+            }
+
+            .col-xs-10 {
+                width: 60.333333%;
+            }
+
+            .form {
+                display: flex;
+                justify-content: space-between
+            }
+
+            .btn-info {
+                display: inline-block
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <d class="row col-xs-10 wrap">
+            <h3>Vue-模仿百度搜索功能</h3>
+            <div class="form">
+                <input type="text" class="form-control" style="border-radius: 0;" autofocus=true
+                    v-model='search_value' @keydown.enter='search(item)' @keydown.up='up' @keydown.down='down'
+                    @keydown.esc='esc' placeholder="输入后回车/点击按钮搜索">
+                <button class="btn btn-info" @click='search(item)'>搜索</button>
+            </div>
+
+            <ul v-if='search_value' :class='{ul:ul}'>
+                <li v-for='(item,index) in search_result' :class='{active:selectIndex==index}' @click='search(item)'>
+                    {{item}}</li>
+            </ul>
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+
+    <script>
+        function queryList(data) {
+            vm.search_result = data.s;
+            return data.s;
+        }
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                search_value: '',
+                search_result: [],
+                selectIndex: 0,
+                baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+                ul: false
+            },
+            watch: {
+                search_value(newVal, oldVal) {
+                    this.getData(newVal);
+                }
+            },
+            methods: {
+                search(item) {
+                    if (this.search_result.length != 0) {
+                        this.search_value = this.search_result[this.selectIndex];
+                        this.ul = true
+                        this.selectIndex = 0;
+                    }
+                    window.location.href = this.baidu + this.search_value;
+                },
+                up() {
+                    this.selectIndex--
+                },
+                down() {
+                    this.selectIndex++
+                },
+                esc() {
+                    this.search_result = [];
+                },
+                getData(val) {
+                    const url = 'http://suggestion.baidu.com/su?cb=queryList&wd=' + val;
+                    var s = document.createElement("script");
+                    s.src = url;
+                    s.type = "text/javascript";
+                    document.body.appendChild(s);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
