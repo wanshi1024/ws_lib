@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue模仿新浪评论</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="../jquery.min.js"></script>
+    <script src="./../vue.js"></script>
+    <script src="./js/face.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        "use strict";
+        let msgBoxList = JSON.parse(window.localStorage.getItem('msgBoxList')) || [];
+       
+        Vue.component('Comment', {
+            props: {
+                userMsg: {
+                    type: Array,
+                }
+            },
+            data() {
+                return {
+                    users: this.userMsg
+                }
+            },
+            methods: {
+                deleteLi(index) {
+                    if (confirm('确认删除此评论?')) {
+                        msgBoxList.splice(index, 1);
+                        window.localStorage.setItem('msgBoxList', JSON.stringify(msgBoxList))
+                    } else {
+                        return;
+                    }
+
+                }
+            },
+            template: `
+            <div class="msgCon">
+                <div class='msgBox' v-for="(item, index) in users" :key="index">
+                    <div class="headUrl">
+                        <img src='images/tx.jpg' width='50' height='50' />
+                        <div>
+                            <span class="title">顽石</span>
+                            <span class="time">{{item.date}}</span>
+                        </div>
+                        <a class="del" @click='deleteLi(index)'>删除</a>
+                    </div>
+                    <div class='msgTxt' v-html='item.msg'></div>
+                </div>
+            </div>
+            `
+        })
+        
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                imgs: faces,
+                isHidden: true,
+                users: msgBoxList,
+                inputMsg:''
+            },
+            watch: {
+                isHidden(val) {
+                    if (val) $(".face").slideUp();
+                    if (!val) $(".face").slideDown();
+                }
+            },
+            methods: {
+                addIcon(index) {
+                    // $(".message").append(`<img src=${this.imgs[index].s} title=${this.imgs[index].title}>`)
+                    this.inputMsg+=`<img src=${this.imgs[index].s} title=${this.imgs[index].title}>`
+                },
+                renderLi() {
+                    let msg = $(".message").html();
+                    if (msg == '') {
+                        alert('不能为空')
+                        return
+                    }
+                    const obj = {
+                        msg,
+                        date: new Date().toLocaleString()
+                    }
+                    msgBoxList.unshift(obj)
+                    window.localStorage.setItem('msgBoxList', JSON.stringify(msgBoxList))
+                    $(".message").html('');
+                },
+
+            },
+            template: `
+            <div id="app">
+                <div id="qq">
+                    <p>有什么新鲜事想告诉大家?</p>
+                    <div class="message" contentEditable='true' v-html='inputMsg'></div>
+                    <div class="But">
+                        <img src="images/bba_thumb.gif" class='bq' @click.stop='isHidden=!isHidden' />
+                        <span class='submit' @click='renderLi'>发表</span>
+                        <div class="face">
+                            <ul>
+                                <li v-for="(item, index) in imgs" :key="index" @click='addIcon(index)'>
+                                    <img :src=item.s alt="" :title=item.title />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <Comment :userMsg='users'></Comment>
+            </div>
+            `
+        })
+        //点击任意位置表情上拉
+        $(document).click(function () {
+            vm.isHidden = true;
+        });
+    </script>
+</body>
+
+</html>
