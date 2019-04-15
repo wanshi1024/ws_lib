@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>pictureViewer</title>
+
+	<link rel="stylesheet" href="css/pictureViewer.css">
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.mousewheel.min.js"></script>
+	<script src="js/pictureViewer.js"></script>
+</head>
+
+<body>
+	<div id="app" class="main-content">
+		<h4 class="title">点击任意图片使用插件</h4>
+		<h3 class="title">交互：ESC键关闭弹框，左键、右键和鼠标滚轮切换图片</h3>
+		<div class="image-list">
+			<div class="cover" v-for="item in imgArr" :key="item.id">
+				<img :src="item" alt="图片路径错误">
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		$(function () {
+			$('.image-list').on('click', '.cover', function () {
+				var this_ = $(this);
+				var images = this_.parents('.image-list').find('.cover');
+				var imagesArr = new Array();
+				$.each(images, function (i, image) {
+					imagesArr.push($(image).children('img').attr('src'));
+				});
+				$.pictureViewer({
+					images: imagesArr, //需要查看的图片，数据类型为数组
+					initImageIndex: this_.index() + 1, //初始查看第几张图片，默认1
+					scrollSwitch: true //是否使用鼠标滚轮切换图片，默认false
+				});
+			});
+		});
+
+		new Vue({
+			el: '#app',
+			data() {
+				return {
+					imgArr: []
+				}
+			},
+			methods: {
+				isHasImg(pathImg) {
+					var ImgObj = new Image();
+					ImgObj.src = pathImg;
+					if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			},
+			created() {
+				$.ajax({
+					type: "get",
+					url: "https://api.apiopen.top/getImages",
+					data: {count:8},
+					success: (d) => {
+						let arr = d.result.map(item => item.img)
+						this.imgArr = arr
+					}
+				});
+			},
+			mounted() {
+				setTimeout(() => {
+					this.imgArr.forEach(item => {
+						if (!this.isHasImg(item)) {
+							var index = this.imgArr.indexOf(item);
+							if (index > -1) {
+								this.imgArr.splice(index, 1);
+							}
+
+						}
+					});
+				}, 1000)
+
+			},
+		})
+
+
+
+
+	</script>
+
+</body>
+
+</html>

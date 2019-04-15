@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>页面标题</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <!-- <img src="http://ww1.sinaimg.cn/large/0065oQSqly1fsfq2pwt72j30qo0yg78u.jpg" alt=""> -->
+
+    <script>
+       const a = 'http://ww1.sinaimg.cn/large/0065oQSqly1fsfq2pwt72j30qo0yg78u.jpg'
+		const b='https://wanshi1024.github.io/ws_lib/icon/update02.png'
+		function isHasImg(pathImg) {
+			var ImgObj = new Image();
+			ImgObj.src = pathImg;
+			
+			if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		console.log(isHasImg(a));
+        
+
+        // var oreq = new ActiveXObject("Microsoft.XMLHTTP")
+        // oreq.open("Get", "http://ww1.sinaimg.cn/large/0065oQSqly1fsfq2pwt72j30qo0yg78u.jpg", false);
+        // oreq.send();
+        // alert(oReq.status)
+        // if (oReq.status == 404)
+        //     alert('不存在');
+        // else
+        //     alert("存在") 
+
+
+        // function CheckImgExists(imgurl) {
+        //     var ImgObj = new Image(); //判断图片是否存在  
+        //     ImgObj.src = imgurl;
+        //     //没有图片，则返回-1  
+        //     if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }
+        // function abc(url) {
+        //     var oreq = new ActiveXObject("Microsoft.XMLHTTP")
+        //     oreq.open("Get", url, false);
+        //     oreq.send();
+        //     alert(oReq.status)
+        //     if (oReq.status == 404)
+        //         alert('不存在');
+        //     else
+        //         alert("存在")
+        // }
+        //  abc('http://ww1.sinaimg.cn/large/0065oQSqly1fsfq2pwt72j30qo0yg78u.jpg')
+        // if (CheckImgExists("http://ww1.sinaimg.cn/large/0065oQSqly1fsfq2pwt72j30qo0yg78u.jpg")) {
+        //     console.log('图片路径有效');
+
+        // } else {
+        //     console.log('图片路径无效');
+        // }
+    </script>
+</body>
+
+</html>
