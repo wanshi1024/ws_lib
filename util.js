@@ -514,17 +514,89 @@ class StorageFn {
 
 // 将封装的函数作为对象导出
 const Util = {
+    /**
+     * 自定义格式化时间
+     * @param  {time} 指定时间 || new Date() 
+     * @param  {cFormat} 格式
+     * @return {String} 字符串
+     * @example formatTime('2018-1-29', '{y}/{m}/{d} 星期{a} {h}:{i}:{s}') // -> 2018/01/29 星期四 00:00:00
+     */
     formatTime,
+    /** 
+     * 数字类型数组排序
+     * @param  {*} Array
+     * @param  {type} Number 1：从小到大 2:从大到小 3：随机 ps:不传type原状返回
+     * @return {Array} Array
+     */
+    /** 
+     * 数字类型数组排序
+     * @param  {*} Array
+     * @param  {type} Number 1：从小到大 2:从大到小 3：随机 ps:不传type原状返回
+     * @return {Array} Array
+     */
     sort,
+    /**
+     * 数组去重
+     * @param {*} Array 
+     * @returns {*} Array
+     */
     removeRepeat,
+    /**
+ * 删除数组中指定元素
+ * @param {*} Array 
+ * @param {*} any 
+ * @param {*} boolean 是否删除所有 默认false 
+ * @returns {*} Array
+ */
     removeElement,
+    /**
+ * 字符串去除空格
+ * @param  {str}
+ * @param  {type} type:  1-所有空格(default)  2-前后空格  3-前空格 4-后空格
+ * @return {String}
+ */
     trim,
+    /**
+ * 字符串大小写转换
+ * @param  {str} str
+ * @param  {type} type:  1:首字母大写(defuse)  2：首页母小写  3：大小写互换  4：全部大写  5：全部小写
+ * @return {String}
+ */
     changeCase,
+    /**
+ * 密码强度检验
+ * @param {*} str 
+ * @returns number
+ */
     checkPwd,
+    /**
+ * 过滤html代码 过滤后的字符串方便在页面显示代码
+ * @param {*} str 
+ * @returns str
+ */
     filterTag,
+    /** 
+ * 数字类型数组排序
+ * @param  {*} Array
+ * @param  {type} Number 1：从小到大 2:从大到小 3：随机 ps:不传type原状返回
+ * @return {Array} Array
+ */
     random,
+    /**
+ * 将阿拉伯数字翻译成中文的大写数字
+ * @param {*} num 
+ * @returns str
+ */
     numberToChinese,
+    /**
+ * 将数字金额转换为大写金额
+ * @param {*} Num 
+ * @returns str
+ */
     moneyNumToChinese,
+    /**
+ * 操作浏览器数据仓库类
+ */
     StorageFn
 }
 module.exports = Util;
