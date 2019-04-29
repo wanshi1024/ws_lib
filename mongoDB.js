@@ -86,7 +86,7 @@ module.exports = {
             let collection = db.collection(collection_name)
             collection.deleteOne(condition, (err, res) => {
                 if (err) {
-                    console.log(`添加数据失败:${err}`)
+                    console.log(`删除数据失败:${err}`)
                 } else {
                     //删除数据条数 大于0表示删除成功
                     let n = res.result.n;
@@ -106,7 +106,7 @@ module.exports = {
             let collection = db.collection(collection_name)
             collection.deleteMany(condition, (err, res) => {
                 if (err) {
-                    console.log(`添加数据失败:${err}`)
+                    console.log(`删除数据失败:${err}`)
                 } else {
                     //删除数据条数 大于0表示删除成功
                     let n = res.result.n;
@@ -126,7 +126,7 @@ module.exports = {
             let collection = db.collection(collection_name)
             collection.find(condition).toArray((err, res) => {
                 if (err) {
-                    console.log(`添加数据失败:${err}`)
+                    console.log(`修改数据失败:${err}`)
                 } else {
                     // res 为 数组
                     callback(res);
@@ -148,7 +148,7 @@ module.exports = {
             let collection = db.collection(collection_name)
             collection.find(condition).skip(skips).limit(limits).toArray((err, res) => {
                 if (err) {
-                    console.log(`添加数据失败:${err}`)
+                    console.log(`查询数据失败:${err}`)
                 } else {
                     // res 为 数组
                     callback(res);
@@ -170,7 +170,7 @@ module.exports = {
             // $set 在原有的基础修改
             collection.updateOne(condition, { $set: data }, (err, res) => {
                 if (err) {
-                    console.log(`添加数据失败:${err}`)
+                    console.log(`修改数据失败:${err}`)
                 } else {
                     //修改数据条数 大于0表示修改成功
                     let n = res.result.n;
@@ -192,7 +192,7 @@ module.exports = {
             // $set 在原有的基础修改
             collection.updateMany(condition, { $set: data }, (err, res) => {
                 if (err) {
-                    console.log(`添加数据失败:${err}`)
+                    console.log(`修改数据失败:${err}`)
                 } else {
                     //修改数据条数 大于0表示修改成功
                     let n = res.result.n;
