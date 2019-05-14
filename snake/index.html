@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./icon.jpg">
+    <title>贪吃蛇</title>
+    <script src="../jquery.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        #snake {
+            border: 1px #ddd solid;
+            background-color: beige
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="snake" width="400" height="400"></canvas>
+    <div id="container">
+        <p>
+            键盘 ↑ ↓ ← → 控制 (咬自己还未判断 有些bug)
+        </p>
+    </div>
+    <script>
+        class SnakeNode {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+        }
+        const canvas = document.getElementById('snake').getContext('2d');
+        //画板尺寸
+        const CanvasSize = 400;
+        //蛇头颜色
+        const HAED_COLOR = 'blue';
+        //蛇身颜色
+        const BODY_COLOR = 'green';
+        //食物颜色
+        const FOOD_COLOR = 'red';
+        //蛇节点尺寸
+        const Node_SIZE = 10;
+        //蛇节点数组坐标
+        let SnakeNodeArr = [];
+        //食物坐标
+        let FoodNode = getFoodSnakeNode();
+        // 方向值 默认右
+        let direction = 39;
+        //定时器
+        let timer;
+        // 速度
+        const speed = 150;
+
+        // 获取随机食物坐标
+        function getFoodSnakeNode() {
+            return new SnakeNode(Math.ceil(Math.random() * ((CanvasSize / 10 - 1) - 1)) * 10,
+                Math.ceil(Math.random() * ((CanvasSize / 10 + 1) - 1)) * 10);
+        }
+
+        // 绘制节点函数
+        function draw(param) {
+            if (param instanceof Array) {
+                param.forEach((item, index) => {
+                    if (index === 0) {
+                        canvas.fillStyle = HAED_COLOR;
+                        canvas.fillRect(item.x, item.y, Node_SIZE, Node_SIZE);
+                    } else {
+                        canvas.fillStyle = BODY_COLOR;
+                        canvas.fillRect(item.x, item.y, Node_SIZE, Node_SIZE);
+                    }
+                })
+            } else if (param instanceof SnakeNode) {
+                console.log('食物坐标:', param);
+                // canvas.fillStyle = FOOD_COLOR;
+                canvas.fillStyle = '#' + (Math.random() * 0xffffff << 0).toString(16);;
+                canvas.fillRect(param.x, param.y, Node_SIZE, Node_SIZE);
+            }
+        }
+
+        //蛇移动
+        function snakeMove() {
+
+            // 判断是否越界
+            if (SnakeNodeArr[0].x < 0 || SnakeNodeArr[0].x > CanvasSize || SnakeNodeArr[0].y < 0 || SnakeNodeArr[0].y > CanvasSize) {
+                console.log(SnakeNodeArr[0]);
+                clearInterval(timer);
+                alert(`撞到墙了,游戏GG`)
+            } else {
+                // 如果蛇头坐标跟食物坐标相等
+                if (SnakeNodeArr[0].x === FoodNode.x && SnakeNodeArr[0].y === FoodNode.y) {
+                    // canvas.clearRect(FoodNode.x, FoodNode.y, Node_SIZE, Node_SIZE);
+                    FoodNode = getFoodSnakeNode();
+                    draw(FoodNode);
+
+                } else {
+                    //清除最后一个蛇节点
+                    canvas.clearRect(SnakeNodeArr[SnakeNodeArr.length - 1].x, SnakeNodeArr[SnakeNodeArr.length - 1].y, Node_SIZE, Node_SIZE);
+                    // 每移动一次删除最后一个节点 在第一个节点基础上添加
+                    SnakeNodeArr.pop();
+                }
+                draw(SnakeNodeArr);
+            }
+            switch (direction) {
+                //上
+                case 38:
+                    SnakeNodeArr.unshift(new SnakeNode(SnakeNodeArr[0].x, SnakeNodeArr[0].y - Node_SIZE));
+                    break;
+                //下
+                case 40:
+                    SnakeNodeArr.unshift(new SnakeNode(SnakeNodeArr[0].x, SnakeNodeArr[0].y + Node_SIZE));
+                    break;
+                //左
+                case 37:
+                    SnakeNodeArr.unshift(new SnakeNode(SnakeNodeArr[0].x - Node_SIZE, SnakeNodeArr[0].y));
+                    break;
+                //右
+                case 39:
+                    SnakeNodeArr.unshift(new SnakeNode(SnakeNodeArr[0].x + Node_SIZE, SnakeNodeArr[0].y));
+                    break;
+            }
+
+
+        }
+
+        //自执行函数  初始化数组
+        (() => {
+            let temp_x = 200;
+            for (let i = 0; i < 5; i++) {
+                SnakeNodeArr.push(new SnakeNode(temp_x, 200));
+                temp_x -= Node_SIZE;
+            }
+            draw(SnakeNodeArr);
+            draw(FoodNode);
+            // 初始化键盘事件
+            document.addEventListener('keydown', e => {
+                let keyCode = e.keyCode;
+                switch (keyCode) {
+                    case 38:
+                        e.preventDefault();
+                        direction = keyCode;
+                        break;
+                    case 40:
+                        e.preventDefault();
+                        direction = keyCode;
+                        break;
+                    case 37:
+                        e.preventDefault();
+                        direction = keyCode;
+                        break;
+                    case 39:
+                        e.preventDefault();
+                        direction = keyCode;
+                        break;
+                    case 32: //空格键暂停
+                        clearInterval(timer);
+                        break;
+                }
+            })
+            timer = setInterval(snakeMove, speed)
+            // snakeMove()
+        })();
+    </script>
+</body>
+
+</html>
