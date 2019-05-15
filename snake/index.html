@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="./icon.jpg">
     <title>贪吃蛇</title>
-    <script src="../jquery.min.js"></script>
     <style>
         * {
             padding: 0;
@@ -22,6 +21,16 @@
             border: 1px #ddd solid;
             background-color: beige
         }
+
+        #container {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        #container p {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 
@@ -29,7 +38,8 @@
     <canvas id="snake" width="400" height="400"></canvas>
     <div id="container">
         <p>
-            键盘 ↑ ↓ ← → 控制 (咬自己还未判断 有些bug)
+            <span>键盘 ↑ ↓ ← → 控制,相反方向已禁用</span>
+            <span>分数: <b id="score">0</b> </span>
         </p>
     </div>
     <script>
@@ -60,11 +70,14 @@
         let timer;
         // 速度
         const speed = 150;
+        //分数
+        let score = 0;
+        let scoreText = document.querySelector('#score');
 
         // 获取随机食物坐标
         function getFoodSnakeNode() {
             return new SnakeNode(Math.ceil(Math.random() * ((CanvasSize / 10 - 1) - 1)) * 10,
-                Math.ceil(Math.random() * ((CanvasSize / 10 + 1) - 1)) * 10);
+                Math.ceil(Math.random() * ((CanvasSize / 10 - 1) - 1)) * 10);
         }
 
         // 绘制节点函数
@@ -89,10 +102,19 @@
 
         //蛇移动
         function snakeMove() {
+            //是否咬到自己
+            let [head, ...body] = SnakeNodeArr;
+            //查询蛇身是否有坐标跟蛇头相等 返回相等的节点 没有则返回underfined
+            let isBiteSelf = body.find(item => {
+                return item.x === head.x && item.y === head.y
+            })
 
+            if ((typeof isBiteSelf) !== 'undefined') {
+                clearInterval(timer);
+                alert(`咬到自己了,游戏GG`)
+            }
             // 判断是否越界
-            if (SnakeNodeArr[0].x < 0 || SnakeNodeArr[0].x > CanvasSize || SnakeNodeArr[0].y < 0 || SnakeNodeArr[0].y > CanvasSize) {
-                console.log(SnakeNodeArr[0]);
+            else if (SnakeNodeArr[0].x < 0 || SnakeNodeArr[0].x > CanvasSize || SnakeNodeArr[0].y < 0 || SnakeNodeArr[0].y > CanvasSize) {
                 clearInterval(timer);
                 alert(`撞到墙了,游戏GG`)
             } else {
@@ -101,7 +123,7 @@
                     // canvas.clearRect(FoodNode.x, FoodNode.y, Node_SIZE, Node_SIZE);
                     FoodNode = getFoodSnakeNode();
                     draw(FoodNode);
-
+                    scoreText.innerHTML = ++score;
                 } else {
                     //清除最后一个蛇节点
                     canvas.clearRect(SnakeNodeArr[SnakeNodeArr.length - 1].x, SnakeNodeArr[SnakeNodeArr.length - 1].y, Node_SIZE, Node_SIZE);
@@ -128,10 +150,29 @@
                     SnakeNodeArr.unshift(new SnakeNode(SnakeNodeArr[0].x + Node_SIZE, SnakeNodeArr[0].y));
                     break;
             }
-
-
         }
+        let up = down = left = right = false; //按键禁用状态 false不禁用
+        function handlerDisabled() {
+            switch (direction) {
+                case 38:
+                    down = true;
+                    left = right = false;
+                    break;
 
+                case 40:
+                    up = true;
+                    left = right = false;
+                    break;
+                case 37:
+                    right = true;
+                    up = down = false;
+                    break;
+                case 39:
+                    left = true;
+                    up = down = false;
+                    break;
+            }
+        }
         //自执行函数  初始化数组
         (() => {
             let temp_x = 200;
@@ -139,36 +180,46 @@
                 SnakeNodeArr.push(new SnakeNode(temp_x, 200));
                 temp_x -= Node_SIZE;
             }
+            handlerDisabled();
             draw(SnakeNodeArr);
             draw(FoodNode);
+
             // 初始化键盘事件
             document.addEventListener('keydown', e => {
                 let keyCode = e.keyCode;
+                handlerDisabled();
                 switch (keyCode) {
                     case 38:
                         e.preventDefault();
-                        direction = keyCode;
+                        if (!up)
+                            direction = keyCode;
                         break;
                     case 40:
                         e.preventDefault();
-                        direction = keyCode;
+                        if (!down)
+                            direction = keyCode;
                         break;
                     case 37:
                         e.preventDefault();
-                        direction = keyCode;
+                        if (!left)
+                            direction = keyCode;
                         break;
                     case 39:
                         e.preventDefault();
-                        direction = keyCode;
+                        if (!right)
+                            direction = keyCode;
                         break;
                     case 32: //空格键暂停
-                        clearInterval(timer);
+                        // clearInterval(timer);
+                        alert('已暂停,点确认继续游戏')
                         break;
                 }
             })
-            timer = setInterval(snakeMove, speed)
-            // snakeMove()
+            timer = setInterval(snakeMove, speed);
         })();
+
+
+
     </script>
 </body>
 
