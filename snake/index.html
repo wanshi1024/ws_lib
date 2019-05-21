@@ -42,6 +42,7 @@
             <span>分数: <b id="score">0</b> </span>
         </p>
     </div>
+
     <script>
         class SnakeNode {
             constructor(x, y) {
@@ -61,11 +62,11 @@
         //蛇节点尺寸
         const Node_SIZE = 10;
         //蛇节点数组坐标
-        let SnakeNodeArr = [];
+        let SnakeNodeArr;
         //食物坐标
-        let FoodNode = getFoodSnakeNode();
+        let FoodNode;
         // 方向值 默认右
-        let direction = 39;
+        let direction;
         //定时器
         let timer;
         // 速度
@@ -73,6 +74,22 @@
         //分数
         let score = 0;
         let scoreText = document.querySelector('#score');
+        //初始化游戏
+        function initGame() {
+            canvas.clearRect(0, 0, CanvasSize, CanvasSize);
+            SnakeNodeArr = [];
+            FoodNode = getFoodSnakeNode();
+            direction = 39;
+            let temp_x = 200;
+            for (let i = 0; i < 5; i++) {
+                SnakeNodeArr.push(new SnakeNode(temp_x, 200));
+                temp_x -= Node_SIZE;
+            }
+            handlerDisabled();
+            draw(SnakeNodeArr);
+            draw(FoodNode);
+            timer = setInterval(snakeMove, speed);
+        }
 
         // 获取随机食物坐标
         function getFoodSnakeNode() {
@@ -111,12 +128,16 @@
 
             if ((typeof isBiteSelf) !== 'undefined') {
                 clearInterval(timer);
-                alert(`咬到自己了,游戏GG`)
+                // alert(`咬到自己了,游戏GG`)
+                if (confirm(`咬到自己了,游戏GG,是否重新开始?`)) initGame()
+                else alert(`所得分数${score}`)
             }
             // 判断是否越界
             else if (SnakeNodeArr[0].x < 0 || SnakeNodeArr[0].x > CanvasSize || SnakeNodeArr[0].y < 0 || SnakeNodeArr[0].y > CanvasSize) {
                 clearInterval(timer);
-                alert(`撞到墙了,游戏GG`)
+                // alert(`撞到墙了,游戏GG`)
+                if (confirm(`撞到墙了,游戏GG,是否重新开始?`)) initGame()
+                else alert(`所得分数${score}`)
             } else {
                 // 如果蛇头坐标跟食物坐标相等
                 if (SnakeNodeArr[0].x === FoodNode.x && SnakeNodeArr[0].y === FoodNode.y) {
@@ -151,6 +172,37 @@
                     break;
             }
         }
+        //键盘控制
+        document.addEventListener('keydown', e => {
+            let keyCode = e.keyCode;
+            handlerDisabled();
+            switch (keyCode) {
+                case 38:
+                    e.preventDefault();
+                    if (!up)
+                        direction = keyCode;
+                    break;
+                case 40:
+                    e.preventDefault();
+                    if (!down)
+                        direction = keyCode;
+                    break;
+                case 37:
+                    e.preventDefault();
+                    if (!left)
+                        direction = keyCode;
+                    break;
+                case 39:
+                    e.preventDefault();
+                    if (!right)
+                        direction = keyCode;
+                    break;
+                case 32: //空格键暂停
+                    // clearInterval(timer);
+                    alert('已暂停,点确认继续游戏')
+                    break;
+            }
+        })
         let up = down = left = right = false; //按键禁用状态 false不禁用
         function handlerDisabled() {
             switch (direction) {
@@ -158,7 +210,6 @@
                     down = true;
                     left = right = false;
                     break;
-
                 case 40:
                     up = true;
                     left = right = false;
@@ -173,51 +224,8 @@
                     break;
             }
         }
-        //自执行函数  初始化数组
-        (() => {
-            let temp_x = 200;
-            for (let i = 0; i < 5; i++) {
-                SnakeNodeArr.push(new SnakeNode(temp_x, 200));
-                temp_x -= Node_SIZE;
-            }
-            handlerDisabled();
-            draw(SnakeNodeArr);
-            draw(FoodNode);
 
-            // 初始化键盘事件
-            document.addEventListener('keydown', e => {
-                let keyCode = e.keyCode;
-                handlerDisabled();
-                switch (keyCode) {
-                    case 38:
-                        e.preventDefault();
-                        if (!up)
-                            direction = keyCode;
-                        break;
-                    case 40:
-                        e.preventDefault();
-                        if (!down)
-                            direction = keyCode;
-                        break;
-                    case 37:
-                        e.preventDefault();
-                        if (!left)
-                            direction = keyCode;
-                        break;
-                    case 39:
-                        e.preventDefault();
-                        if (!right)
-                            direction = keyCode;
-                        break;
-                    case 32: //空格键暂停
-                        // clearInterval(timer);
-                        alert('已暂停,点确认继续游戏')
-                        break;
-                }
-            })
-            timer = setInterval(snakeMove, speed);
-        })();
-
+        initGame();
 
 
     </script>
