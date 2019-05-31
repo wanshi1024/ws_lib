@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+    <!-- <script src="./../jquery.min.js"></script> -->
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <script src="./Carousel.js"></script>
+    <script>
+        $(function () {
+            $('#app').Carousel({
+                imgArr: [
+                    'https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=77d1cd475d43fbf2da2ca023807fca1e/9825bc315c6034a8ef5250cec5134954082376c9.jpg',
+                    'https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=b5e4c905865494ee982209191df4e0e1/c2cec3fdfc03924590b2a9b58d94a4c27d1e2500.jpg',
+                    'https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0c78105b888ba61ec0eece2f713597cc/0e2442a7d933c8956c0e8eeadb1373f08202002a.jpg',
+                    'https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=92afee66fd36afc3110c39658318eb85/908fa0ec08fa513db777cf78376d55fbb3fbd9b3.jpg',
+                    'https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg'
+                ],
+                switchSpeed: 2000,
+                switchTime: 500
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <style>
+        #app {
+            width: 500px;
+            height: 300px;
+            border: 1px #ddd solid;
+            margin: 10px auto;
+            /* transition: all 200ms */
+        }
+    </style>
+    <div id="app">
+        <!-- <div class="img-container"><img src="" alt="轮播图"></div>
+   <div class="switch-dot"><span></span></div>
+   <div class="prev"></div>
+   <div class="next"></div> -->
+    </div>
+
+</body>
+
+</html>
