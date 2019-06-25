@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>一起看流星雨</title>
   <link rel="icon" href="./star.png">
+  <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
 
   <style type="text/css">
     html,
@@ -81,11 +82,15 @@
 </head>
 
 <body>
-  
   <div class="container">
+    <div class="music-wrap" style="display: none;">
+      <audio id="app" controls autoplay>
+        你的浏览器不支持音频
+        <source src="./夜空中最亮的星.mp3">
+      </audio>
+    </div>
     <div class="content">
       <canvas id="universe"></canvas>
-
       <div id="footer">
         <svg id="scene" x="0px" y="0px" width="1600px" height="315px">
           <path id="ground" d="M0,316.4209c0,0,157.7119-35.416,469-56c7.3833-0.4883,23.7876-3.5488,31.3335-4.0166
