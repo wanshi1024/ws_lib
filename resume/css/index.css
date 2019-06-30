@@ -1,85 +1,92 @@
-.container h1 {
-  text-align: center;
+body {
+  background-color: #111;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  overflow-y: scroll;
 }
-.container table {
-  margin: 10px auto;
+svg {
+  display: none;
+}
+canvas {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+}
+table {
+  margin: 1rem auto;
   border-collapse: collapse;
   background-color: #CFE8CC;
 }
-.container table tr td:nth-of-type(odd) {
+table tr td:nth-of-type(odd) {
   background-color: #E0E0E0;
 }
-.container table tr td {
+table tr td {
   padding: 1rem;
   box-sizing: border-box;
-  border: 1px #000 solid;
+  border: 1px #ccc2c2 solid;
   text-align: center;
   font-weight: bold;
 }
-.container table tr td .hobby {
+table tr td .hobby {
   text-align: left;
   letter-spacing: .1em;
 }
-.container table tr .head-img-td {
+table tr .head-img-td {
   padding: 0;
   background-color: #fff !important;
 }
-.container table tr .head-img-td #head-img {
+table tr .head-img-td #head-img {
   width: 10em;
   vertical-align: middle;
 }
-.container table tr .content {
+table tr .content {
   width: 12rem;
   font-weight: normal;
 }
-.container table tr .big-td {
+table tr .big-td {
   padding: 4rem 1rem;
 }
-.container table tr .big-td + td {
+table tr .big-td + td {
   text-align: left;
   padding: 0 1rem;
 }
-.container table tr .big-td + td p {
+table tr .big-td + td p {
   line-height: 1.8em;
   letter-spacing: .1em;
 }
 @media screen and (max-width: 800px) {
-  .container {
-    width: 100%;
-  }
-  .container h1 {
-    text-indent: 5rem;
-    padding: 1rem 0;
-    display: none;
-  }
-  .container table {
+  table {
     margin: 0 auto;
     border-collapse: collapse;
+    width: 100%;
   }
-  .container table tr td {
+  table tr td {
     padding: 1rem;
-    border: 1px #000 solid;
+    border: 1px #ccc2c2 solid;
     text-align: center;
   }
-  .container table tr .head-img-td {
+  table tr .head-img-td {
     padding: 0;
   }
-  .container table tr .head-img-td #head-img {
+  table tr .head-img-td #head-img {
     width: 10rem;
     height: 13rem;
   }
-  .container table tr .content {
+  table tr .content {
     width: 0rem;
     font-weight: bold;
   }
-  .container table tr .big-td {
+  table tr .big-td {
     padding: 4rem 1rem;
   }
-  .container table tr .big-td + td {
+  table tr .big-td + td {
     text-align: left;
     padding: 0 1rem;
   }
-  .container table tr .big-td + td p {
+  table tr .big-td + td p {
     line-height: 1.2em;
     letter-spacing: .1em;
     margin: .5em 0;

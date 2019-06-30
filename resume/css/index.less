@@ -1,45 +1,107 @@
-@borderColor: #000;
+@borderColor: #ccc2c2;
 
-.container {
-    h1 {
-        text-align: center;
-    }
 
-    table {
-        margin: 10px auto;
-        border-collapse: collapse;
-        background-color: #CFE8CC;
+body {
+    background-color: #111;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    overflow-y: scroll;
+}
 
-        tr {
-            td:nth-of-type(odd) {
-                background-color: #E0E0E0;
+svg {
+    display: none;
+}
+
+canvas {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+}
+
+table {
+    margin: 1rem auto;
+    border-collapse: collapse;
+    background-color: #CFE8CC;
+
+    tr {
+        td:nth-of-type(odd) {
+            background-color: #E0E0E0;
+        }
+
+        td {
+            padding: 1rem;
+            box-sizing: border-box;
+            border: 1px @borderColor solid;
+            text-align: center;
+            font-weight: bold;
+
+            .hobby {
+                text-align: left;
+                letter-spacing: .1em;
             }
 
-            td {
-                padding: 1rem;
-                box-sizing: border-box;
-                border: 1px @borderColor solid;
-                text-align: center;
-                font-weight: bold;
-                .hobby{
-                    text-align: left;
+        }
+
+        .head-img-td {
+            padding: 0;
+            background-color: #fff !important;
+
+            #head-img {
+                width: 10em;
+                vertical-align: middle;
+            }
+        }
+
+        .content {
+            width: 12rem;
+            font-weight: normal;
+        }
+
+        .big-td {
+            padding: 4rem 1rem;
+
+            &+td {
+                text-align: left;
+                padding: 0 1rem;
+
+                p {
+                    line-height: 1.8em;
                     letter-spacing: .1em;
                 }
-                
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+    table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 100%;
+
+        tr {
+            td {
+                padding: 1rem;
+                border: 1px @borderColor solid;
+                text-align: center;
             }
 
             .head-img-td {
                 padding: 0;
-                background-color: #fff !important;
+
                 #head-img {
-                    width: 10em;
-                    vertical-align: middle;
+                    width: 10rem;
+                    height: 13rem;
                 }
             }
 
             .content {
-                width: 12rem;
-                font-weight: normal;
+                width: 0rem;
+                font-weight: bold;
             }
 
             .big-td {
@@ -48,67 +110,11 @@
                 &+td {
                     text-align: left;
                     padding: 0 1rem;
+
                     p {
-                        line-height: 1.8em;
+                        line-height: 1.2em;
                         letter-spacing: .1em;
-                        // word-break:normal;
-                        // text-indent: -2em;
-                        // margin-left: 2em;
-                        
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .container {
-        width: 100%;
-
-        h1 {
-            // text-align: center;
-            text-indent: 5rem;
-            padding: 1rem 0;
-            display: none;
-        }
-
-        table {
-            margin: 0 auto;
-            border-collapse: collapse;
-
-            tr {
-                td {
-                    padding: 1rem;
-                    border: 1px @borderColor solid;
-                    text-align: center;
-                }
-
-                .head-img-td {
-                    padding: 0;
-
-                    #head-img {
-                        width: 10rem;
-                        height: 13rem;
-                    }
-                }
-
-                .content {
-                    width: 0rem;
-                    font-weight: bold;
-                }
-                .big-td {
-                    padding: 4rem 1rem;
-    
-                    &+td {
-                        text-align: left;
-                        padding: 0 1rem;
-    
-                        p {
-                            line-height: 1.2em;
-                            letter-spacing: .1em;
-                            margin: .5em 0;
-                        }
+                        margin: .5em 0;
                     }
                 }
             }
