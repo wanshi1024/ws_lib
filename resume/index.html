@@ -14,18 +14,25 @@
         }
     </style>
     <link rel="stylesheet" href="./css/index.css">
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
 </head>
 
 <body>
     <canvas id="app"></canvas>
     <script src='js/lodash.js'></script>
     <script src="js/index.js"></script>
-    <div class="music-wrap" style="display: none;">
-        <audio id="app" controls autoplay loop>
+    <div class="music-wrap" style="display: none;"></div>
+    <script>
+        $(function(){
+            let str=`
+            <audio id="app" controls autoplay loop>
             你的浏览器不支持音频
             <source src="./Nigel Silin - Sakura Tears.mp3">
-        </audio>
-    </div>
+            </audio>
+            `;
+            $('.music-wrap').append(str);
+        })
+    </script>
     <table>
         <tr>
             <td>姓名</td>
@@ -33,7 +40,6 @@
             <td>性别</td>
             <td class="content">男</td>
             <td rowspan="3" class="head-img-td">
-                <!-- <img id="head-img" src="http://img5.imgtn.bdimg.com/it/u=141070357,4207405604&fm=26&gp=0.jpg" alt=""> -->
                 <img id="head-img" src="./img/rabbit.jpg " alt="">
             </td>
         </tr>
