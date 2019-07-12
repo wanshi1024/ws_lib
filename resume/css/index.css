@@ -17,9 +17,9 @@ canvas {
   opacity: .4;
 }
 table {
-  margin: 1rem auto;
   border-collapse: collapse;
   background-color: #CFE8CC;
+  min-height: 100%;
 }
 table tr td:nth-of-type(odd) {
   background-color: #E0E0E0;
