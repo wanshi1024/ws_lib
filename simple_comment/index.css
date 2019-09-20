@@ -1,0 +1,223 @@
+/* 获取昵称提示 */
+
+.getNickName-tip {
+    color: rgb(255, 30, 0);
+}
+
+
+/* 点赞css */
+
+.handle .active {
+    color: crimson !important;
+}
+
+
+/* --------------------------- */
+
+.glyphicon-trash:before {
+    vertical-align: text-bottom;
+}
+
+.toast-message {
+    width: 50%;
+}
+
+#box {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#box {
+    border-radius: 0px;
+}
+
+.takeComment {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background-color: #eef3fa;
+}
+
+.takeComment .takeSbmComment {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.takeComment .takeSbmComment button,
+.takeComment .takeSbmComment span {
+    vertical-align: middle;
+}
+
+.takeComment .takeSbmComment span {
+    color: #aaa;
+    font-size: 12px;
+    margin: 0 10px;
+}
+
+.commentOn {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    background-color: #eef3fa;
+}
+
+.commentOn .messList,
+.commentOn .noContent {
+    background-color: #fff;
+}
+
+.commentOn .messList .reply {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+
+.commentOn .noContent,
+.commentOn .messList .operation
+{
+    color: #aaa;
+}
+
+.commentOn .noContent {
+    text-align: center;
+    padding: 10px;
+}
+
+.commentOn .messList .operation .replyTime {
+    float: left;
+    color: #aaa;
+}
+
+.commentOn .messList .operation .handle {
+    float: right;
+}
+
+.commentOn .messList .operation .handle a {
+    display: inline-block;
+    color: #666;
+    text-decoration: none;
+}
+
+.commentOn .messList .operation .handle a span {
+    margin-left: 5px;
+    color: #aaa;
+    vertical-align: middle;
+}
+
+
+/* .commentOn .messList .operation .handle a:hover,
+.commentOn .messList .operation .handle a span {
+    color: red;
+    background: greenyellow;
+    transform: scale3d(.8);
+    -webkit-transform: scale3d(.8);
+    -moz-transform: scale3d(.8);
+    -ms-transform: scale3d(.8);
+    -o-transform: scale3d(.8);
+} */
+
+.commentOn .page {
+    text-align: center;
+}
+
+.commentOn .page ul {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+
+/* 加载动画css */
+
+.loading-tip {
+    left: 34%;
+    position: absolute;
+    top: 58%;
+    color: #048ca7;
+}
+
+.base {
+    left: 60%;
+    margin: -7.5em;
+    position: absolute;
+    top: 50%;
+    width: 9em;
+    transform: rotateX(45deg) rotateZ(45deg);
+    transform-style: preserve-3d;
+}
+
+.cube,
+.cube:after,
+.cube:before {
+    content: '';
+    float: left;
+    position: absolute;
+    height: 3em;
+    width: 3em;
+}
+
+
+/* Top */
+
+.cube {
+    background-color: #05afd1;
+    position: relative;
+    transform: translateZ(3em);
+    transform-style: preserve-3d;
+    transition: .25s;
+    box-shadow: 13em 13em 1.5em rgba(0, 0, 0, 0.1);
+    animation: anim 1s infinite;
+}
+
+.cube:after {
+    background-color: #049dbc;
+    transform: rotateX(-90deg) translateY(3em);
+    transform-origin: 100% 100%;
+}
+
+.cube:before {
+    background-color: #048ca7;
+    transform: rotateY(90deg) translateX(3em);
+    transform-origin: 100% 0;
+}
+
+.cube:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.cube:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.cube:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.cube:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.cube:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.cube:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.cube:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.cube:nth-child(8) {
+    animation-delay: 0.4s;
+}
+
+.cube:nth-child(9) {
+    animation-delay: 0.45s;
+}
+
+@keyframes anim {
+    50% {
+        transform: translateZ(0.5em);
+    }
+}

@@ -17,6 +17,7 @@ canvas {
   opacity: .4;
 }
 table {
+  margin: 0 auto;
   border-collapse: collapse;
   background-color: #CFE8CC;
   min-height: 100%;

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>顽石简单的评论留言</title>
+    <link rel="icon" href="icon.png">
+    <link rel="stylesheet" href="dist/bootstrap 3.37/css/bootstrap.min.css">
+    <script src="dist/js/jquery-1.11.3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <script src="page.js"></script>
+    <script src="index.js"></script>
+
+</head>
+
+<body>
+    <div id="box" class="container">
+
+        <div class="takeComment">
+            <textarea rows="6" class="takeTextField form-control" placeholder="在这里输入你想说的话吧(180字以内)" id="tijiaoText" v-model="textValue"></textarea>
+            <div class="takeSbmComment clearfix">
+                <span id="nickname"></span>
+                <button class="btn btn-success btn-sm" @click="submitComment()">提交评论</button>
+            </div>
+        </div>
+
+        <div class="commentOn">
+            <div class="noContent" v-show="dataList.length==0">暂无留言</div>
+            <comment-component :list="dataList" @delete="deleteComment"></comment-component>
+            <div class="page">
+                <!-- <paging-component :count="total" @change-index="changeIndex"></paging-component> -->
+                <Page :total="total" :current.sync="current" v-show="dataList.length!=0" />
+            </div>
+        </div>
+
+
+        <!-- 模态框 -->
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">取个昵称吧,亲</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="请取一个2-8字的昵称" v-model="myNickName">
+                            <span class="getNickName-tip" v-show="getNickNameTipShow">昵称请在2-8字之间</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" @click="submitNickName()">确认</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+
+        <div class='base' v-show="loading">
+            <div class='cube'></div>
+            <div class='cube'></div>
+            <div class='cube'></div>
+            <div class='cube'></div>
+            <div class='cube'></div>
+            <div class='cube'></div>
+            <div class='cube'></div>
+            <div class='cube'></div>
+            <div class='cube'></div>
+        </div>
+        <p class="loading-tip" v-show="loading">正在发送请求中...</p>
+
+        <!-- #box底部 -->
+    </div>
+
+
+    <script src="dist/bootstrap 3.37/js/bootstrap.min.js"></script>
+    <script src="dist/js/bootstrap-paginator.min.js"></script>
+    <script src="./loading/prefixfree.min.js"></script>
+    <script src="./tip/message.js"></script>
+</body>
+
+
+</html>
