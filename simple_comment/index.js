@@ -9,8 +9,8 @@ $(function() {
         nickName: '顽石mua'
     }];
 
-    const baseURL = 'http://2629zj3897.zicp.vip:46157/ssj/comment';
-    // const baseURL = 'http://localhost:8080/ssj/comment';
+    // const baseURL = 'http://2629zj3897.zicp.vip:46157/ssj/comment';
+    const baseURL = 'http://192.168.1.101:8080/ssj/comment';
     const app = new Vue({
         el: '#box',
         data() {
@@ -121,7 +121,7 @@ $(function() {
         },
         created() {
             $('#nickname').text(localStorage.getItem('nickname'));
-            // this.getList(1);
+            this.getList(1);
 
         },
 

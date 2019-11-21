@@ -22,19 +22,8 @@
     <canvas id="app"></canvas>
     <script src='js/lodash.js'></script>
     <script src="js/index.js"></script>
-    <div class="music-wrap" style="display: none;"></div>
-    <script>
-        $(function(){
-            let str=`
-            <audio id="app" controls autoplay loop>
-            你的浏览器不支持音频
-            <source src="http://free4vip.bjlemon.com/Nigel%20Silin%20-%20Sakura%20Tears.mp3">
-            </audio>
-            `;
-            $('.music-wrap').append(str);
-        })
-    </script>
-    <table class="table table-hover"> 
+
+    <table class="table table-hover">
         <tr>
             <td>姓名</td>
             <td class="content">石四凭</td>
@@ -47,70 +36,72 @@
         <tr>
             <td>出生日期</td>
             <td class="content">1998/08/21</td>
-            <td>身高</td>
-            <td class="content">xxx</td>
-        </tr>
-        <tr>
+            <!-- <td>身高</td>
+            <td class="content">xxx</td> -->
             <td>籍贯</td>
             <td class="content">安徽安庆 </td>
+        </tr>
+        <tr>
             <td>民族</td>
             <td class="content">汉族</td>
-        </tr>
-        <tr>
             <td>学历</td>
             <td class="content">高中(有自学课程)</td>
-            <td>身体状态</td>
-            <td colspan="2" class="content">肢体残疾,不影响编程工作,有更多的时间投入</td>
         </tr>
         <tr>
-            <td>毕业学校</td>
-            <td class="content">宿松二中</td>
-            <td>专业</td>
-            <td colspan="2" class="content">自学编程 前端+Java</td>
+
+            <td>健康状态</td>
+            <td colspan="4" class="content">二级肢体,不影响编程工作,有更多的时间投入</td>
+        </tr>
+        <tr>
+            <!-- <td>毕业学校</td>
+            <td class="content">宿松二中</td> -->
+            <td>擅长领域</td>
+            <td colspan="4" class="content">技术类: 前端+JavaWeb &nbsp;&nbsp;&nbsp; 营销服务: 在线客服</td>
         </tr>
 
         <tr>
             <td>联系电话</td>
             <td class="content">18455625753</td>
-            <td>语言能力</td>
-            <td colspan="2" class="content">普通话标准,英语良好</td>
+            <td>电子邮箱</td>
+            <td class="content" colspan="2">2942504702@qq.com</td>
+
         </tr>
         <tr>
             <td>求职意向</td>
-            <td class="content">前端开发</td>
-            <td>电子邮箱</td>
-            <td class="content" colspan="2">2942504702@qq.com</td>
+            <td class="content">编程开发/语音客服</td>
+            <td>语言能力</td>
+            <td colspan="2" class="content">普通话标准,英语良好</td>
         </tr>
         <tr>
             <td class="big-td">专业技能</td>
             <td class="content" colspan="4">
                 <p>
-                    <b>⒈</b> 熟练掌握前端基础HTML5,CSS3,JavaScript, 会灵活运用 <mark>jQuery,ajax</mark> 以及
+                    <b>⒈</b> 熟练掌握HTML5,CSS3,JavaScript, <mark>jQuery,ajax</mark> 以及
                     <mark>ES6</mark> 新语法.
                 </p>
                 <p>
-                    <b>⒉</b> 熟悉 <mark>nodejs + MongoDB</mark> 的服务器搭建以及express脚手架和webpack开发环境的使用...
+                    <b>⒉</b> 熟悉 <mark>nodejs + MongoDB+express</mark>轻应用服务端开发 ...
                 </p>
                 <p style="word-break:break-all">
-                    <b>⒊</b> 熟练掌握 <mark>Vue.js</mark> 以及Vue CLI环境前端的开发, vue全家桶和相关UI插件iview,elementUI等...
+                    <b>⒊</b> 熟练掌握 <mark>vue</mark> 以及vue全家桶和相关UI插件iview,elementUI等...
                 </p>
                 <p>
-                    <b>⒋</b> 熟悉代码管理工具 <mark>git</mark> ,ps基础操作,以及 <mark>微信小程序+移动端</mark> 前端的开发
+                    <b>⒋</b> 熟悉版本控制工具 <mark>git</mark> ,ps基础操作,以及 <mark>微信小程序+移动端</mark> 前端的开发
                 </p>
                 <p>
-                    <b>⒌</b> 擅长使用各种webUI框架,<mark>bootstrap,layui,mui,jQueryUI</mark>等等
+                    <b>⒌</b> 熟练掌握 mysql数据库以及sql语句书写
                 </p>
                 <p>
-                    <b>⒍</b> 熟悉java web后端编程,<mark>MySQL+Tomcat+Servlet+jsp开发过管理系统</mark> 继续加深学习spring框架中...
+                    <b>⒍</b> 熟练使用<mark>mybatis+spring+springmvc </mark>,maven+spring boot学习中...
                 </p>
             </td>
         </tr>
-        
+
         <tr>
             <td>兴趣爱好</td>
             <td class="content" colspan="4">
                 <p class="hobby">
-                    热爱编程代码, 喜欢唱歌, 电竞游戏等...
+                    热爱编程代码, 喜欢唱歌, 看blogs,电竞游戏等...
                 </p>
             </td>
         </tr>
@@ -119,25 +110,32 @@
             <td class="big-td">自我评价</td>
             <td class="content" colspan="4">
                 <p class="self-evaluation">
-                    本人思维敏捷,学习能力较强,对待工作认真负责,执行力强.
-                    有坚定的学习意愿以及改变自己的强烈动力,虚心接受各种意见.
-                    虽然身体残疾,但是身残志坚,有一颗积极乐观,奋进向前的心.
-                    希望通过自己的努力实现自我价值,自立更生,在工作中做出最大的贡献.
+                    本人思维敏捷,学习能力较强,对待工作认真负责,执行力强. 有坚定的学习意愿以及改变自己的强烈动力,虚心接受各种意见. 虽然身体残疾,但是身残志坚,有一颗积极乐观,奋进向前的心. 希望通过自己的努力实现自我价值,自立更生,在工作中做出最大的贡献.
                 </p>
             </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>网站作品</td>
             <td colspan="4">
                 <a href="http://freshair-comfort.cn/" target="_blank">美的空调(北京诚信春天)http://freshair-comfort.cn/</a>
                 <br>
                 <a href="http://www.aicjr.com/">创爱残友网http://www.aicjr.com/</a>
-               
             </td>
-        </tr>
+        </tr> -->
     </table>
 
-
+    <!-- <div class="music-wrap" style="display: none;"></div>
+    <script>
+        $(function() {
+            let str = `
+            <audio id="app" controls autoplay loop>
+            你的浏览器不支持音频
+            <source src="http://free4vip.bjlemon.com/Nigel%20Silin%20-%20Sakura%20Tears.mp3">
+            </audio>
+            `;
+            $('.music-wrap').append(str);
+        })
+    </script> -->
 </body>
 
 </html>
