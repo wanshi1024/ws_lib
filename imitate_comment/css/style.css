@@ -56,6 +56,7 @@ body {
     float: left;
     /*左浮动*/
     cursor: pointer;
+    width: 22px;
 }
 
 #qq .But span.submit {
